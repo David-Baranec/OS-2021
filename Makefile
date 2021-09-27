@@ -178,16 +178,27 @@ mkfs/mkfs: mkfs/mkfs.c $K/fs.h $K/param.h
 
 UPROGS=\
 	$U/_cat\
+	$U/_copy\
 	$U/_echo\
+	$U/_exec\
+	$U/_fork\
+	$U/_forkexec\
 	$U/_forktest\
 	$U/_grep\
 	$U/_init\
 	$U/_kill\
+	$U/_list\
 	$U/_ln\
 	$U/_ls\
 	$U/_mkdir\
 	$U/_rm\
+	$U/_open\
+	$U/_pingpong\
+	$U/_pipe1\
+	$U/_pipe2\
+	$U/_redirect\
 	$U/_sh\
+	$U/_sleep\
 	$U/_stressfs\
 	$U/_usertests\
 	$U/_grind\
