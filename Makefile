@@ -181,6 +181,7 @@ UPROGS=\
 	$U/_copy\
 	$U/_echo\
 	$U/_exec\
+	
 	$U/_fork\
 	$U/_forkexec\
 	$U/_forktest\
@@ -196,6 +197,7 @@ UPROGS=\
 	$U/_pingpong\
 	$U/_pipe1\
 	$U/_pipe2\
+	
 	$U/_redirect\
 	$U/_sh\
 	$U/_sleep\
@@ -203,6 +205,7 @@ UPROGS=\
 	$U/_usertests\
 	$U/_grind\
 	$U/_wc\
+
 	$U/_zombie\
 
 
