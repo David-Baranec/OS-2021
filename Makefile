@@ -205,7 +205,7 @@ UPROGS=\
 	$U/_usertests\
 	$U/_grind\
 	$U/_wc\
-
+	$U/_xargs\
 	$U/_zombie\
 
 
