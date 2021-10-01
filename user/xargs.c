@@ -1,28 +1,50 @@
 #include "kernel/types.h"
-#include "kernel/stat.h"
+#include "kernel/param.h"
 #include "user/user.h"
 
-int main(int argc, char *argv[]){
-    if(argc < 2){
-        fprintf(2,"usage: xargs cmd [...]\n");
-        exit(1);        
+#define BUF_SIZE 1024
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        fprintf(2, "usage: xargs command\n");
+        exit(1);
     }
-    int priznak = 1;
-    char **newargv = malloc(sizeof(char*)*(argc+2));
-    memcpy(newargv,argv,sizeof(char*)*(argc+1));
-    newargv[argc+1] = 0; // null pointer for last one
-    while(priznak){
-        char buf[512], *p = buf;
-        while((priznak = read(0,p,1)) && *p != '\n')
-            p++;
-        if(!priznak) exit(0);
-        *p = 0;
-        newargv[argc] = buf;
-        if(fork() == 0){
-            exec(argv[1], newargv+1);
-            exit(0);
+
+    int can_read = 1;
+    char *_argv[MAXARG];
+    char buf[BUF_SIZE];
+
+    for (int i = 1; i < argc; ++i) {
+        _argv[i - 1] = argv[i];
+    }
+
+    while (can_read) {
+        char c;
+        int _argv_cnt = argc - 1;
+        int buf_idx = 0;
+        int buf_begin = 0;
+        while (1) {
+            can_read = read(0, &c, sizeof(c));
+            if (!can_read)
+                exit(0);
+            if (c == ' ' || c == '\n') {
+                buf[buf_idx++] = 0;
+                _argv[_argv_cnt++] = &buf[buf_begin];
+                buf_begin = buf_idx;
+                if (c == '\n')
+                    break;
+            } else {
+                buf[buf_idx++] = c;
+            }
         }
-        wait(0);
+
+        _argv[_argv_cnt] = 0;
+
+        if (fork() == 0) {
+            exec(_argv[0], _argv);
+        } else {
+            wait(0);
+        }
     }
     exit(0);
 }
