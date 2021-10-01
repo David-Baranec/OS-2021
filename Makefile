@@ -193,6 +193,7 @@ UPROGS=\
 	$U/_mkdir\
 	$U/_rm\
 	$U/_open\
+	$U/_pingpong\
 	$U/_pipe1\
 	$U/_pipe2\
 	$U/_redirect\
