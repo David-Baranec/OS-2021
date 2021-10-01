@@ -200,7 +200,7 @@ UPROGS=\
 	$U/_primes\
 	$U/_redirect\
 	$U/_sh\
-	$U/_sleep\ 
+	$U/_sleep\
 	$U/_stressfs\
 	$U/_usertests\
 	$U/_grind\
