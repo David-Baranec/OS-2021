@@ -2,7 +2,6 @@
 #include "kernel/stat.h"
 #include "user/user.h"
 #include "kernel/fs.h"
-
 void find(char *dir, char *file)
 {
     char buf[512], *p;
