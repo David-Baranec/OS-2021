@@ -8,13 +8,13 @@ int main(int argc, char *argv[]){
     for(int i = 2; i <= 35; i++)
         write(p[0][1],&i,1);
     close(p[0][1]);
-    int idx = 0, sieve, num;
+    int idx = 0, selected, num;
     while(fork() == 0){
-        if(read(p[idx][0],&sieve,1)){
-            fprintf(1,"prime %d\n",sieve);
+        if(read(p[idx][0],&selected,1)){
+            fprintf(1,"prime %d\n",selected);
             pipe(p[1^idx]);
             while(read(p[idx][0],&num,1)){
-                if(num % sieve != 0)
+                if(num % selected != 0)
                     write(p[idx^1][1],&num,1);
             }
             close(p[1^idx][1]);
