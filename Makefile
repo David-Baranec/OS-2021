@@ -181,10 +181,6 @@ UPROGS=\
 	$U/_copy\
 	$U/_echo\
 	$U/_exec\
-<<<<<<< HEAD
-	$U/_find\
-=======
->>>>>>> e5b8e92e5dafc5eb30cf0f60b87835d39150ab0d
 	$U/_fork\
 	$U/_forkexec\
 	$U/_forktest\
@@ -197,21 +193,15 @@ UPROGS=\
 	$U/_mkdir\
 	$U/_rm\
 	$U/_open\
-	$U/_pingpong\
 	$U/_pipe1\
 	$U/_pipe2\
-<<<<<<< HEAD
-	$U/_primes\
-=======
->>>>>>> e5b8e92e5dafc5eb30cf0f60b87835d39150ab0d
 	$U/_redirect\
 	$U/_sh\
-	$U/_sleep\
+	$U/_sleep\ 
 	$U/_stressfs\
 	$U/_usertests\
 	$U/_grind\
 	$U/_wc\
-	$U/_xargs\
 	$U/_zombie\
 
 
