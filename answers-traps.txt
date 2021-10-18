@@ -1,0 +1,13 @@
+a0 až a7 pre celé číslo a fa0 až fa7 pre desatinne.V tomto prípade a2 obsahuje 13 pre printf funkciu.
+
+main nevolal f, pretože kompilátor tento proces optimalizoval, v call.asm je to rovno 'li a1,12' f zavolal g, ale je vložený (priamo použitý 'addiw a0, a0, 3')
+
+0x628 printf funkcia
+
+0x38, adresa nasledujúceho pokynu po jalr
+
+He110 World
+57116 je e110 v hexadecimálnom formáte a 0x00646c72 je „dlr“ podľa tabuľky ascii.
+Ak je to veľký endian, nie je potrebné meniť 57616, ale je potrebné obrátiť hodnotu v i na 0x726c6400 (pretože sa číta po bajtoch).
+
+vytlačí to hodnotu v registri a2
