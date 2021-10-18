@@ -1,7 +1,7 @@
-funkcia fork??
+funkcia ..............
  moze byt zrychlena
 
-v tabulke je  trampline trapframe a usyscall namapovany.
-0 text 1 guardpage 2 stack
-pokial proces bezi v uzivatelskom mode nemoze precitat ani zapisat pamat mapovanu strankou 1
+stránka 0 obsahuje PTE a vlajky vm 0x00000000 až 0x20000000
+stránka 2 obsahuje PTE a vlajky vm 0x80000000 až 0xa0000000
+proces môže čítať/zapisovať, pretože sú nastavené príznaky čítania/zápisu (b10 a b100).
 3. z hora je USYSCALL
