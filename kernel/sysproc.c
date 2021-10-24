@@ -156,5 +156,5 @@ sys_sigreturn(void)
   p->trapframe->a7 = p->alarm_context.a6;
 
   p->in_alarm_handler = 0;
-  return 0;
+  return p->trapframe->a0;
 }
