@@ -5,7 +5,11 @@
 #include "riscv.h"
 #include "defs.h"
 #include "fs.h"
-
+#include "spinlock.h"
+#include "sleeplock.h"
+#include "proc.h"
+#include "file.h"
+#include "fcntl.h"
 /*
  * the kernel's page table.
  */
@@ -431,4 +435,14 @@ copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)
   } else {
     return -1;
   }
+}
+struct vma*
+search_vma(struct proc *p, uint addr)
+{
+  for (int i = 0; i < NVMA; i++){
+    if(p->vmatable[i].pf != 0)
+      if(addr >= p->vmatable[i].addr && addr < p->vmatable[i].addr + p->vmatable[i].length)
+        return p->vmatable + i;
+  }
+  return 0;    
 }

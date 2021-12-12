@@ -6,6 +6,11 @@
 #include "proc.h"
 #include "defs.h"
 
+#include "sleeplock.h"
+#include "fs.h"
+#include "file.h"
+#include "fcntl.h"
+
 struct spinlock tickslock;
 uint ticks;
 
@@ -67,6 +72,28 @@ usertrap(void)
     syscall();
   } else if((which_dev = devintr()) != 0){
     // ok
+  } else if(r_scause() == 13 || r_scause() == 15){
+
+    struct vma *vma = search_vma(myproc(), r_stval());
+    if (vma == 0)
+      exit(-1);  
+    // TODO: Check permissions
+    char *mem = kalloc();
+    if (mem == 0)
+      exit(-1);
+    memset(mem, 0 , PGSIZE);
+
+    struct file *f = vma->pf;
+    uint off = PGROUNDDOWN(r_stval()) - vma->addr + vma->offset;
+    ilock(f->ip);
+    int r;
+    if((r = readi(f->ip, 0, (uint64)mem, off, PGSIZE)) <= 0){
+      kfree(mem);
+      iunlock(f->ip);
+      exit(-1);
+    }
+    iunlock(f->ip);
+    // TODO: map with correct flags
   } else {
     printf("usertrap(): unexpected scause %p pid=%d\n", r_scause(), p->pid);
     printf("            sepc=%p stval=%p\n", r_sepc(), r_stval());

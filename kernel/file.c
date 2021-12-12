@@ -42,7 +42,16 @@ filealloc(void)
   release(&ftable.lock);
   return 0;
 }
-
+// Decrement ref count for file f, the lock is held
+int filederef(struct file* f)
+{
+  acquire(&ftable.lock);
+  if(f->ref < 1)
+    panic("filederef");
+  int r = f->ref--;
+  release(&ftable.lock);
+  return r;
+}
 // Increment ref count for file f.
 struct file*
 filedup(struct file *f)
